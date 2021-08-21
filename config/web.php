@@ -9,7 +9,7 @@ $config = [
     'homeUrl'=> array('/site/index'),
 
     'basePath' => dirname(__DIR__),
-    'name' => 'Gestion de stagiare',
+    'name' => 'GestionStagiare',
 
     'language'=>'fr',
     'defaultRoute' => '/user/security/login',
@@ -19,6 +19,11 @@ $config = [
         '@npm'   => '@vendor/npm-asset',
     ],
     'components' => [
+        'user' => [
+            'identityClass' => 'app\models\User',
+            'enableAutoLogin' => false,
+            'authTimeout' => 30000,
+        ],
         'assetManager' => [
             'bundles' => [
                 'kartik\form\ActiveFormAsset' => [
@@ -116,14 +121,15 @@ $config = [
             'class' => \Da\User\Module::class,
             'classMap' => [
                 'User' => app\models\User::class,
+
             ],
             'enableEmailConfirmation' => false,
             //think how to create a component for that
             // ...other configs from here: [Configuration Options](installation/configuration-options.md), e.g.
             'administrators' => ['Administrateur','admin'], // this is required for accessing administrative actions
-           'administratorPermissionName'=>false,
+            'administratorPermissionName'=>false,
             // 'generatePasswords' => true,
-            // 'switchIdentitySessionKey' => 'myown_usuario_admin_user_key',
+         //   'switchIdentitySessionKey' => 'myown_usuario_admin_user_key',
             'controllerMap' => [
                 'security' => 'app\controllers\user\UserController',
                 'admin' => 'app\controllers\user\AdminController',

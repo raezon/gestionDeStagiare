@@ -19,7 +19,7 @@ use app\models\Departement;
     {
         return [
             [['id'], 'integer'],
-            [['short_name', 'name', 'type'], 'safe'],
+            [['short_name', 'name_D', 'type'], 'safe'],
         ];
     }
 
@@ -60,8 +60,7 @@ use app\models\Departement;
         ]);
 
         $query->andFilterWhere(['like', 'short_name', $this->short_name])
-            ->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'type', $this->type]);
+            ->andFilterWhere(['like', 'name_D', $this->name_D]);
 
         return $dataProvider;
     }

@@ -54,12 +54,12 @@ $this->registerJs($search);
         'specialite',
         [
                 'attribute' => 'id_encadreur',
-                'label' => 'Id Encadreur',
+                'label' => 'Nom Encadreur',
                 'value' => function($model){                   
-                    return $model->encadreur->id;                   
+                    return $model->encadreur->nom;                   
                 },
                 'filterType' => GridView::FILTER_SELECT2,
-                'filter' => \yii\helpers\ArrayHelper::map(\app\models\Encadreur::find()->asArray()->all(), 'id', 'id'),
+                'filter' => \yii\helpers\ArrayHelper::map(\app\models\Encadreur::find()->asArray()->all(), 'id', 'nom'),
                 'filterWidgetOptions' => [
                     'pluginOptions' => ['allowClear' => true],
                 ],
@@ -67,12 +67,12 @@ $this->registerJs($search);
             ],
         [
                 'attribute' => 'id_stage',
-                'label' => 'Id Stage',
+                'label' => 'Nom Stage',
                 'value' => function($model){                   
-                    return $model->stage->id;                   
+                    return $model->stage->nom;                   
                 },
                 'filterType' => GridView::FILTER_SELECT2,
-                'filter' => \yii\helpers\ArrayHelper::map(\app\models\Stage::find()->asArray()->all(), 'id', 'id'),
+                'filter' => \yii\helpers\ArrayHelper::map(\app\models\Stage::find()->asArray()->all(), 'id', 'nom'),
                 'filterWidgetOptions' => [
                     'pluginOptions' => ['allowClear' => true],
                 ],
@@ -80,7 +80,7 @@ $this->registerJs($search);
             ],
         [
                 'attribute' => 'id_centre_etude',
-                'label' => 'Id Centre Etude',
+                'label' => 'Nom Centre Etude',
                 'value' => function($model){                   
                     return $model->centreEtude->name;                   
                 },

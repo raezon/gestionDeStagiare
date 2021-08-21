@@ -38,7 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'nom',
         'date_debut_du_stage',
         'date_fin_du_stage',
-        'theme_id',
+        'theme.type',
     ];
     echo DetailView::widget([
         'model' => $model,
@@ -62,12 +62,12 @@ if($providerStagiaire->totalCount){
             'adress',
             'specialite',
             [
-                'attribute' => 'encadreur.id',
-                'label' => 'Id Encadreur'
+                'attribute' => 'encadreur.nom',
+                'label' => 'Encadreur nom'
             ],
                         [
                 'attribute' => 'centreEtude.name',
-                'label' => 'Id Centre Etude'
+                'label' => 'Centre Etude nom'
             ],
     ];
     echo Gridview::widget([

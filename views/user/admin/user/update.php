@@ -86,7 +86,15 @@ $this->params['breadcrumbs'][] = $this->title;
                                 ); ?>
 
 
-                                <?= Yii::$app->controller->make(Grade::class, ['form' => $form, 'user' => $user,'authItem'=> $authItem])->run() ?>
+<?= $this->render(
+                                    '_form',
+                                    [
+                                        'form' => $form,
+                                        'user' => $user,
+                                        'authItem' => $authItem,
+ 
+                                    ]
+                                ) ?>
                                 <div class="gradeInputs"></div>
                                 <div class="form-group">
                                     <div class="col-lg-offset-3 col-lg-9">

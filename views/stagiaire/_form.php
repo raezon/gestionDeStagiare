@@ -34,7 +34,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'specialite')->textInput(['maxlength' => true, 'placeholder' => 'Specialite']) ?>
 
     <?= $form->field($model, 'id_encadreur')->widget(\kartik\widgets\Select2::classname(), [
-        'data' => \yii\helpers\ArrayHelper::map(\app\models\Encadreur::find()->orderBy('id')->asArray()->all(), 'id', 'id'),
+        'data' => \yii\helpers\ArrayHelper::map(\app\models\Encadreur::find()->orderBy('id')->asArray()->all(), 'id', 'nom'),
         'options' => ['placeholder' => 'Choose Encadreur'],
         'pluginOptions' => [
             'allowClear' => true
@@ -42,7 +42,7 @@ use yii\widgets\ActiveForm;
     ]); ?>
 
     <?= $form->field($model, 'id_stage')->widget(\kartik\widgets\Select2::classname(), [
-        'data' => \yii\helpers\ArrayHelper::map(\app\models\Stage::find()->orderBy('id')->asArray()->all(), 'id', 'id'),
+        'data' => \yii\helpers\ArrayHelper::map(\app\models\Stage::find()->orderBy('id')->asArray()->all(), 'id', 'nom'),
         'options' => ['placeholder' => 'Choose Stage'],
         'pluginOptions' => [
             'allowClear' => true

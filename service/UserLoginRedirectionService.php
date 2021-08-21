@@ -69,7 +69,7 @@ class UserLoginRedirectionService
                     return Yii::$app->response->redirect(['/user/security/login']);
                 }
             } else {
-                if ($this->user->isUtilisateur()) {
+                if ($this->user->isEmployee()) {
 
                     return Yii::$app->response->redirect(['/decaissement/create']);
                 }

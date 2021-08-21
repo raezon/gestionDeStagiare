@@ -165,47 +165,34 @@ class AdminController extends BaseController
     public function actionCreate()
     {
         /** @var User $user */
-        $user = $this->make(User::class, [], ['scenario' => 'create']);
+        $user = new User();
         /** @var Grade $grqde */
         /** @var UserEvent $event */
         $event = $this->make(UserEvent::class, [$user]);
 
         $this->make(AjaxRequestModelValidator::class, [$user])->validate();
 
-        if($this->user->load(Yii::$app->request->post())) {
-           // $this->trigger(UserEvent::EVENT_BEFORE_CREATE, $event);
-            $mailService = MailFactory::makeWelcomeMailerService($user);
-            if ($this->make(UserCreateService::class, [$user, $mailService])->run()) {
+        if ($user->load(Yii::$app->request->post())) {
+            // $this->trigger(UserEvent::EVENT_BEFORE_CREATE, $event);
+
+
+            if ($user->createUser($user)) {
                 //Assigning Role
                 $this->user->setAuthAssignement($user->id, $user->role);
                 //Creation of Flash Message .
                 Yii::$app->getSession()->setFlash('success', Yii::t('usuario', 'User has been created'));
                 //Redirection For Registered user After the registration .
                 $this->make(RegistrationUserRedirectionService::class, [$user->role])->run();
-               
             } else {
-                print_r($user->errors);
-                die();
+
                 Yii::$app->session->setFlash('danger', Yii::t('usuario', 'User account could not be created.'));
             }
         }
-       
+
 
         return $this->render('user/create', ['user' => $user, 'authItem' => $this->authItem]);
     }
-    /**
-     * Methde update the role and grand in case of modification .
-     *
-     * @param [object] $user
-     * @param [object] $auth
-     * @param [object] $grade
-     * @return void
-     */
-    public function updateActors($user, $auth)
-    {
-        $auth->item_name = $user->role;
-        $auth->update();
-    }
+
     /**
      *  Overide action Update
      *
@@ -214,43 +201,28 @@ class AdminController extends BaseController
      */
     public function actionUpdate($id)
     {
+
         $user = $this->user->findUser($id);
         /** @var UserEvent $event */
         $event = $this->make(UserEvent::class, [$user]);
         $auth = AuthAssignment::findAuthAssignment($id);
 
         //Needed in form and form embded for ajax onchange request
-
-
         $user->role = $auth->item_name;
 
         $this->make(AjaxRequestModelValidator::class, [$user])->validate();
 
         if ($this->make(UserFormCreationValidator::class, [$user])->validate()) {
-
+ 
             $this->trigger(ActiveRecord::EVENT_BEFORE_UPDATE, $event);
 
             if ($user->load(Yii::$app->request->post()) and $user->update()) {
                 //Update
-                $this->updateActors($user, $auth);
                 Yii::$app->getSession()->setFlash('success', Yii::t('usuario', 'Account details have been updated'));
                 $this->trigger(ActiveRecord::EVENT_AFTER_UPDATE, $event);
-                return $this->redirect(['/user/admin/index']);
-            } else {
-                $this->updateActors($user, $auth,);
+
                 return $this->redirect(['/user/admin/index']);
             }
-        } else {
-            if ($this->make(UserFormCreationErrorsValidator::class, [$user])->validate()) {
-                Yii::$app->SessionsUserCreation->check();
-                return Yii::$app->controller->render('user/update_embded_with_grade', ['user' => $user, 'grade' => $grade, $this->authItem]);
-            }
-        }
-        //Render Form Approbateur from the begining
-
-        if ($auth->item_name == $this->user::ROLE_APPROVING) {
-
-            return Yii::$app->controller->render('user/update_embded_with_grade', ['user' => $user, 'grade' => $grade, 'authItem' => $this->authItem]);
         }
 
         return $this->render('user/update', ['user' => $user, 'authItem' => $this->authItem]);

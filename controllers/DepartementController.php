@@ -50,11 +50,11 @@ class DepartementController extends Controller
     {
         $model = $this->findModel($id);
         $providerStagiaire = new \yii\data\ArrayDataProvider([
-            'allModels' => $model->stagiaires,
+           // 'allModels' => $model->stagiaires,
         ]);
         return $this->render('view', [
             'model' => $this->findModel($id),
-            'providerStagiaire' => $providerStagiaire,
+            'providerStagiaire' => [],
         ]);
     }
 

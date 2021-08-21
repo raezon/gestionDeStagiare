@@ -95,9 +95,9 @@ class Stagiaire extends \yii\db\ActiveRecord
             'numr_telephone' => Yii::t('app', 'Numr Telephone'),
             'adress' => Yii::t('app', 'Adress'),
             'specialite' => Yii::t('app', 'Specialite'),
-            'id_encadreur' => Yii::t('app', 'Id Encadreur'),
-            'id_stage' => Yii::t('app', 'Id Stage'),
-            'id_centre_etude' => Yii::t('app', 'Id Centre Etude'),
+            'id_encadreur' => Yii::t('app', 'Nom Encadreur'),
+            'id_stage' => Yii::t('app', 'Nom Stage'),
+            'id_centre_etude' => Yii::t('app', 'Nom Centre Etude'),
         ];
     }
     

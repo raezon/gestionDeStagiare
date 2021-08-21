@@ -38,7 +38,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'numr_telephone')->textInput(['maxlength' => true, 'placeholder' => 'Numr Telephone']) ?>
 
     <?= $form->field($model, 'id_departement')->widget(\kartik\widgets\Select2::classname(), [
-        'data' => \yii\helpers\ArrayHelper::map(\app\models\Departement::find()->orderBy('id')->asArray()->all(), 'id', 'id'),
+        'data' => \yii\helpers\ArrayHelper::map(\app\models\Departement::find()->orderBy('id')->asArray()->all(), 'id', 'name_D'),
         'options' => ['placeholder' => 'Choose Departement'],
         'pluginOptions' => [
             'allowClear' => true

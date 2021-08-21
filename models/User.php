@@ -23,8 +23,8 @@ class User extends BaseUser
 {
 
     const ROLE_ADMIN = 'Administrateur';
-    const ROLE_APPROVING = 'Approbateur';
-    const ROLE_USER = 'Utilisateur';
+    const ROLE_RESPONSABLE= 'Responsable';
+    const ROLE_EMPLOYEE = 'Employé';
 
     public $password_changed_at;
     public $isGuest;
@@ -38,7 +38,7 @@ class User extends BaseUser
     {
         $rules = parent::rules();
         return ArrayHelper::merge($rules, [
-            [['role'], 'required'],
+            [['role'], 'safe'],
             [['password'],'required', 'on' => 'create']
         ]);
     }
@@ -106,7 +106,6 @@ class User extends BaseUser
      */
     public  function isAdmin( ) {
     
- 
        return  $this->hasRole(self::ROLE_ADMIN);
         
         //return (!self::isGuest() && (self::getCurrentUser()->identity->isAdmin /*|| $this->getRole() == ROLE_ADMIN */));
@@ -116,17 +115,17 @@ class User extends BaseUser
      *
      * @return boolean
      */
-    public  function isApprobateur()
+    public  function isResponsable()
     {
-        return  $this->hasRole(self::ROLE_APPROVING);
+        return  $this->hasRole(self::ROLE_RESPONSABLE);
     }
     /**
      * Methode Check is User is a Utilisateur
      *
      * @return boolean
      */
-    public   function isUtilisateur() {
-        return  $this->hasRole(self::ROLE_USER);
+    public   function isEmployee() {
+        return  $this->hasRole(self::ROLE_EMPLOYEE);
     }
     /**
      * Methode Assign Role To a specifique User after it's creation By an admin
@@ -138,6 +137,14 @@ class User extends BaseUser
         $model = new AuthAssignment();
         $model->item_name = $roleName;
         $model->user_id = $id;
+        $time = time();
+        $model->created_at =$time;
+        if($model->save()){
+
+        }else{
+            print_r($model->errors);
+            die();
+        }
         return $model->save();
     }
     //Queries
@@ -145,6 +152,17 @@ class User extends BaseUser
 
         return User::find()->where(['id' => $id])->one();
 
+    }
+    
+    public static function createUser($model){
+        $time = time();
+        $self = new Self();
+        $security = $self->make(SecurityHelper::class);
+        $model->password_hash= $security->generatePasswordHash($model->password, $self->getModule()->blowfishCost);
+        $model->confirmed_at = $time;
+        $model->created_at =$time;
+        $model->updated_at =$time;
+        return $model->save();
     }
 
 

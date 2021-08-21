@@ -54,11 +54,11 @@ $this->params['breadcrumbs'][] = $this->title;
         'adress',
         'specialite',
         [
-            'attribute' => 'encadreur.id',
+            'attribute' => 'encadreur.nom',
             'label' => 'Id Encadreur',
         ],
         [
-            'attribute' => 'stage.id',
+            'attribute' => 'stage.nom',
             'label' => 'Id Stage',
         ],
         [

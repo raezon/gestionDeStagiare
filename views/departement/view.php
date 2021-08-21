@@ -7,7 +7,7 @@ use kartik\grid\GridView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Departement */
 
-$this->title = $model->name;
+$this->title = $model->name_D;
 $this->params['breadcrumbs'][] = ['label' => 'Departement', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -46,8 +46,8 @@ $this->params['breadcrumbs'][] = $this->title;
     $gridColumn = [
         ['attribute' => 'id', 'visible' => false],
         'short_name',
-        'name',
-        'type',
+        'name_D',
+       
     ];
     echo DetailView::widget([
         'model' => $model,
@@ -57,40 +57,7 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
     
     <div class="row">
-<?php
-if($providerStagiaire->totalCount){
-    $gridColumnStagiaire = [
-        ['class' => 'yii\grid\SerialColumn'],
-            ['attribute' => 'id', 'visible' => false],
-            'nom',
-            'prenom',
-            'age',
-            'niveaux',
-            'email:email',
-            'numr_telephone',
-            'adress',
-            'specialite',
-            [
-                'attribute' => 'encadreur.id',
-                'label' => 'Id Encadreur'
-            ],
-            [
-                'attribute' => 'stage.id',
-                'label' => 'Id Stage'
-            ],
-                ];
-    echo Gridview::widget([
-        'dataProvider' => $providerStagiaire,
-        'pjax' => true,
-        'pjaxSettings' => ['options' => ['id' => 'kv-pjax-container-stagiaire']],
-        'panel' => [
-            'type' => GridView::TYPE_PRIMARY,
-            'heading' => '<span class="glyphicon glyphicon-book"></span> ' . Html::encode('Stagiaire'),
-        ],
-        'columns' => $gridColumnStagiaire
-    ]);
-}
-?>
+
 
     </div>
 </div>

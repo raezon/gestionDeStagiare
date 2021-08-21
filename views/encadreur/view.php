@@ -52,8 +52,8 @@ $this->params['breadcrumbs'][] = $this->title;
         'statu',
         'numr_telephone',
         [
-            'attribute' => 'departement.id',
-            'label' => 'Id Departement',
+            'attribute' => 'departement.name_D',
+            'label' => 'Departement nom',
         ],
     ];
     echo DetailView::widget([

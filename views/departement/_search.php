@@ -19,9 +19,8 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'short_name')->textInput(['maxlength' => true, 'placeholder' => 'short_name']) ?>
 
-    <?= $form->field($model, 'name')->textInput(['maxlength' => true, 'placeholder' => 'Name']) ?>
+    <?= $form->field($model, 'name_D')->textInput(['maxlength' => true, 'placeholder' => 'Name']) ?>
 
-    <?= $form->field($model, 'type')->textInput(['maxlength' => true, 'placeholder' => 'Type']) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

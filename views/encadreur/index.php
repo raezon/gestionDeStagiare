@@ -52,12 +52,12 @@ $this->registerJs($search);
         'numr_telephone',
         [
                 'attribute' => 'id_departement',
-                'label' => 'Id Departement',
+                'label' => 'Nom Departement',
                 'value' => function($model){                   
-                    return $model->departement->id;                   
+                    return $model->departement->name_D;                   
                 },
                 'filterType' => GridView::FILTER_SELECT2,
-                'filter' => \yii\helpers\ArrayHelper::map(\app\models\Departement::find()->asArray()->all(), 'id', 'id'),
+                'filter' => \yii\helpers\ArrayHelper::map(\app\models\Departement::find()->asArray()->all(), 'id', 'name_D'),
                 'filterWidgetOptions' => [
                     'pluginOptions' => ['allowClear' => true],
                 ],

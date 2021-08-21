@@ -65,9 +65,9 @@ class UserController extends BaseController
 
             $this->trigger(FormEvent::EVENT_BEFORE_LOGIN, $event);
             if ($form->login()) {
-                $form->getUser()->updateAttributes(['last_login_at' => time()]);
+               // $form->getUser()->updateAttributes(['last_login_at' => time()]);
 
-                $this->trigger(FormEvent::EVENT_AFTER_LOGIN, $event);
+              //  $this->trigger(FormEvent::EVENT_AFTER_LOGIN, $event);
                 //Service Responsible on the rederction to the corresponding role
                 $this->make(UserLoginRedirectionService::class, [])->run();
 

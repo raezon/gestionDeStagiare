@@ -11,7 +11,7 @@ use mootensai\behaviors\UUIDBehavior;
  * This is the base model class for table "auth_assignment".
  *
  * @property string $item_name
- * @property string $user_id
+ * @property integer $user_id
  * @property integer $created_at
  *
  * @property \app\models\AuthItem $itemName
@@ -25,20 +25,7 @@ class AuthAssignment extends \yii\db\ActiveRecord
 
     public function __construct(){
         parent::__construct();
-/*
-/*
-        $this->_rt_softdelete = [
-            'deleted_by' => \Yii::$app->user->id,
-            'deleted_at' => date('Y-m-d H:i:s'),
-        ];
-        $this->_rt_softrestore = [
-            'deleted_by' => 0,
-            'deleted_at' => date('Y-m-d H:i:s'),
-        ];
 
-*/
-
-*/
     }
 
     /**
@@ -59,8 +46,8 @@ class AuthAssignment extends \yii\db\ActiveRecord
     {
         return [
             [['item_name', 'user_id'], 'required'],
-            [['created_at'], 'integer'],
-            [['item_name', 'user_id'], 'string', 'max' => 64]
+            [['created_at','user_id'], 'integer'],
+            [['item_name'], 'string', 'max' => 64]
         ];
     }
 
@@ -98,21 +85,7 @@ class AuthAssignment extends \yii\db\ActiveRecord
     public function behaviors()
     {
         return [
-            'timestamp' => [
-                'class' => TimestampBehavior::className(),
-                'createdAtAttribute' => 'created_at',
-                'updatedAtAttribute' => 'updated_at',
-                'value' => new \yii\db\Expression('NOW()'),
-            ],
-            'blameable' => [
-                'class' => BlameableBehavior::className(),
-                'createdByAttribute' => 'created_by',
-                'updatedByAttribute' => 'updated_by',
-            ],
-            'uuid' => [
-                'class' => UUIDBehavior::className(),
-                'column' => 'id',
-            ],
+
         ];
     }
 

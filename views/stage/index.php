@@ -29,7 +29,7 @@ $this->registerJs($search);
         'nom',
         'date_debut_du_stage',
         'date_fin_du_stage',
-        'theme_id',
+        'type',
         [
             'class' => 'yii\grid\ActionColumn',
         ],

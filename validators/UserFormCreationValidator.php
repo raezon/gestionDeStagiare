@@ -41,12 +41,11 @@ class UserFormCreationValidator implements ValidatorInterface
      */
     public function validate()
     {
-        if ($this->user->load(Yii::$app->request->post())&&$this->user->role == $this->user::ROLE_ADMIN  && $this->user->validate()) {
+        if ($this->user->load(Yii::$app->request->post())) {
 
             return true;
         } else {
-            print_r($this->user->errors);
-            die();
+
             return false;
         }
     }

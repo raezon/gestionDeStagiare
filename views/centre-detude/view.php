@@ -71,12 +71,12 @@ if($providerStagiaire->totalCount){
             'adress',
             'specialite',
             [
-                'attribute' => 'encadreur.id',
-                'label' => 'Id Encadreur'
+                'attribute' => 'encadreur.nom',
+                'label' => 'Encadreur nom'
             ],
             [
-                'attribute' => 'stage.id',
-                'label' => 'Id Stage'
+                'attribute' => 'stage.nom',
+                'label' => 'Stage nom'
             ],
                 ];
     echo Gridview::widget([

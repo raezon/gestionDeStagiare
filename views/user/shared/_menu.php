@@ -37,19 +37,19 @@ use app\models\User;
             [
                 'label' => Yii::t('app', 'Create demande'),
                 'url' => ['/decaissement/create'],
-                'visible' =>  Yii::$app->user->identity->isUtilisateur()
+                'visible' =>  Yii::$app->user->identity->isEmployee()
             ],
             [
                 'label' => Yii::t('app', 'My Disbursements'),
                 'url' => ['/decaissement/index'],
-                'visible' =>  Yii::$app->user->identity->isUtilisateur()
+                'visible' =>  Yii::$app->user->identity->isEmployee()
             ],
             [
                 'label' => Yii::t('app', 'Create'),
                 'items' => [
                     [
                         'label' => Yii::t('app', 'New user'),
-                        'url' => ['/user/admin/create'],
+                        'url' => ['/user/admin/create/'],
                     ],
                 ]
                 , 'visible' =>  Yii::$app->user->identity->isAdmin()
