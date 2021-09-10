@@ -19,6 +19,7 @@ use mootensai\behaviors\UUIDBehavior;
  * @property string $numr_telephone
  * @property string $adress
  * @property string $specialite
+ * @property string $status
  * @property integer $id_encadreur
  * @property integer $id_stage
  * @property integer $id_centre_etude

@@ -53,6 +53,30 @@ $this->registerJs($search);
         'adress',
         'specialite',
         [
+            'attribute' => 'status',
+            'header' => 'Confirmer Fin Stagiare',
+            'value' => function ($model) {
+                if ($model->status == 1) {
+                    return '<div class="text-center">
+                            <span class="text-success">Fin stage</span>
+                        </div>';
+                }
+              
+                if ($model->status == 0)
+                    return Html::a(
+                        Yii::t('usuario', 'Confirm'),
+                        ['confirm-stagiare', 'id' => $model->id],
+                        [
+                            'class' => 'btn btn-xs btn-success btn-block ',
+                            'data-method' => 'post',
+                        ]
+                    );
+            },
+            'format' => 'raw',
+           
+        ],
+
+        [
                 'attribute' => 'id_encadreur',
                 'label' => 'Nom Encadreur',
                 'value' => function($model){                   

@@ -30,16 +30,7 @@ use yii\helpers\ArrayHelper;
     ]
 ); ?>
 <div class="row">
-    <div class="col-lg-3  ">
-        <?= $form->field($model, 'users')->dropDownList(
 
-
-            ArrayHelper::map($utilisateurs, 'user_id', 'user.username'),
-
-            ['prompt' => 'Sélectionner Responsable']
-        );
-        ?>
-    </div>
     <div class="col-lg-5  ">
         <?=
         $form->field($model, 'date_start')->widget(

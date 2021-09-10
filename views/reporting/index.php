@@ -5,23 +5,29 @@ use phpnt\chartJS\ChartJs;
 ?>
 
 
+<div class="mt-2">
 
+    <?php
+echo $this->render('_form', ['model' => $model, 'dataProviders' => $dataProviders]);
+?>
+
+</div>
 <div class="row">
     <div class="col-md-6">
         <!-- Some of daily montant transaction of the current month-->
-        <?= ChartJs::widget([
-            'type'  => ChartJs::TYPE_LINE,
-            'data'  => $dailyTransactionOfCurentMonth,
-            'options'   => []
-        ]); ?>
+        <?=ChartJs::widget([
+    'type' => ChartJs::TYPE_LINE,
+    'data' => $dailyTransactionOfCurentMonth,
+    'options' => [],
+]);?>
     </div>
     <!-- Some  montly montant transaction of the current year-->
     <div class="col-md-6">
-        <?= ChartJs::widget([
-            'type'  => ChartJs::TYPE_BAR,
-            'data'  => $yearlyTransactions,
-            'options'   => []
-        ]); ?>
+        <?=ChartJs::widget([
+    'type' => ChartJs::TYPE_BAR,
+    'data' => $yearlyTransactions,
+    'options' => [],
+]);?>
     </div>
 </div>
 
@@ -29,12 +35,24 @@ use phpnt\chartJS\ChartJs;
 <div class="row">
     <!-- daily request  decaissement of the current month -->
     <div class="col-md-6">
-        <?= ChartJs::widget([
-            'type'  => ChartJs::TYPE_LINE,
-            'data'  => $dailyDecaissementRequest,
-            'options'   => []
-        ]);
-        ?></div>
+        <?=ChartJs::widget([
+    'type' => ChartJs::TYPE_LINE,
+    'data' => $dailyDecaissementRequest,
+    'options' => [],
+]);
+?></div>
+    <!--over all of decaissement status of the curent year  -->
+
+
+
+    <!-- daily request  decaissement of the current month -->
+    <div class="col-md-6">
+        <?=ChartJs::widget([
+    'type' => ChartJs::TYPE_DOUGHNUT,
+    'data' => $yearlyStatusStagiare,
+    'options' => [],
+]);
+?></div>
     <!--over all of decaissement status of the curent year  -->
 
 
@@ -44,5 +62,5 @@ use phpnt\chartJS\ChartJs;
 
 $this->registerJsFile('@web/js/chart.min.js', [
     'depends' => 'yii\web\JqueryAsset',
-    'position' => \yii\web\View::POS_END
+    'position' => \yii\web\View::POS_END,
 ]);

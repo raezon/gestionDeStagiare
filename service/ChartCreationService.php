@@ -48,7 +48,7 @@ class ChartCreationService
         // Progression Du nombre de transactions menuselle
 
         // Motifi decaissement durant le mois en cours
-    //    $this->arrayDataQueries[4] = $arrayDataQueries[4];
+        $this->arrayDataQueries[3] = $arrayDataQueries[3];
 
         $this->arrayLabelsUserNames=$arrayLabelsUserNames;
     }
@@ -140,7 +140,7 @@ class ChartCreationService
         $donutsColors = ["rgb(75,181,67)", 'rgb(255, 99, 132)', 'rgb(255, 205, 86)'];
         $otherChartsColors = "rgba(75,192,192,0.4)";
 
-        for ($i = 0; $i < 3; $i++) {
+        for ($i = 0; $i < 4; $i++) {
 
             switch ($i) {
                 case 0:
@@ -159,12 +159,8 @@ class ChartCreationService
 
                     break;
                 case 3:
-                    $label = "Progression Du nombre de transactions menuselle";
-                    $this->arrayDataChart[] = $this->createArrayDataChart($this->arrayDataQueries[3], ChartCreationService::MONTHS, $label, $otherChartsColors);
-                    break;
-                case 4:
-                    $label = ["Valide", "Rejeter", "En cour de validation"];
-                    $this->arrayDataChart[] = $this->createArrayDataChart($this->arrayDataQueries[4], $label, ChartCreationService::TYPEDECAISSEMENT, $donutsColors);
+                    $label = ["En cours de stage", "Fin de stage"];
+                    $this->arrayDataChart[] = $this->createArrayDataChart($this->arrayDataQueries[3], $label, ChartCreationService::TYPEDECAISSEMENT, $donutsColors);
                     break;
             }
         }

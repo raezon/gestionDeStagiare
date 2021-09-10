@@ -21,7 +21,8 @@
         "2amigos/yii2-usuario": "~1.0",
         "mootensai/yii2-enhanced-gii": "dev-master",
         "kartik-v/yii2-datecontrol": "dev-master",
-        "phpnt/yii2-chartjs": "~0.0.2"
+        "phpnt/yii2-chartjs": "~0.0.2",
+        "kartik-v/yii2-field-range": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

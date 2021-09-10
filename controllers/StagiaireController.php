@@ -7,6 +7,7 @@ use app\models\Stagiaire;
 use app\models\StagiaireSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\web\UnauthorizedHttpException;
 use yii\filters\VerbFilter;
 
 /**
@@ -39,6 +40,18 @@ class StagiaireController extends Controller
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
+    }
+    public function actionConfirmStagiare($id){
+        $model = StagiaireSearch::findOne(['id' => $id]);
+
+        if ($model->status == 0)
+            $model->status = 1;
+
+        if ($model->update()) {
+        } else {
+            throw new UnauthorizedHttpException( 'Vous pouvez pas Blocker cette demande');
+        }
+        return $this->redirect(['/stagiare/index']);
     }
 
     /**

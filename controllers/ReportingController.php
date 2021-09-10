@@ -2,9 +2,7 @@
 
 namespace app\controllers;
 
-use app\models\AuthAssignment;
 use app\models\SearchBar;
-use app\models\TransactionSearch;
 use app\models\User;
 use app\repository\BiQuery;
 //models
@@ -43,27 +41,27 @@ class ReportingController extends Controller
     public function behaviors()
     {
         return [
-            'verbs'  => [
-                'class'   => VerbFilter::class,
+            'verbs' => [
+                'class' => VerbFilter::class,
                 'actions' => [
-                    'delete'                => ['post'],
-                    'confirm'               => ['post'],
-                    'block'                 => ['post'],
+                    'delete' => ['post'],
+                    'confirm' => ['post'],
+                    'block' => ['post'],
                     //'switch-identity' => ['post','get'],
-                    'password-reset'        => ['post'],
+                    'password-reset' => ['post'],
                     'force-password-change' => ['post'],
                 ],
             ],
             'access' => [
-                'class'      => AccessControl::class,
+                'class' => AccessControl::class,
                 'ruleConfig' => [
                     'class' => AccessRuleFilter::class,
                 ],
-                'rules'      => [
+                'rules' => [
 
                     [
-                        'allow'         => true,
-                        'roles'         => ['@'],
+                        'allow' => true,
+                        'roles' => ['@'],
                         'matchCallback' => function ($rule, $action) {
                             return $this->user->isAdmin();
                         },
@@ -73,7 +71,7 @@ class ReportingController extends Controller
                         'allow' => true,
                         'roles' => ['@'],
                         'matchCallback' => function ($rule, $action) {
-                            return  $this->user->isApprobateur();
+                            return $this->user->isApprobateur();
                         },
                     ],
                     [
@@ -81,7 +79,7 @@ class ReportingController extends Controller
                         'allow' => true,
                         'roles' => ['@'],
                         'matchCallback' => function ($rule, $action) {
-                            return  $this->user->isFinancier();
+                            return $this->user->isFinancier();
                         },
                     ],
                 ],
@@ -93,7 +91,7 @@ class ReportingController extends Controller
     {
 
         $this->user = new User();
-        // array use for transaction during the month 
+        // array use for transaction during the month
         $this->arrayDataQueries[0] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
         // array used for yearly transaction
         $this->arrayDataQueries[1] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
@@ -107,7 +105,6 @@ class ReportingController extends Controller
         parent::init();
     }
 
-
     /**
      * Methods responsible on getting the result of queries of the repository BiQuery.
      *
@@ -118,7 +115,7 @@ class ReportingController extends Controller
     public function queriesAnswer($class, $date_state = null, $date_end = null, $listOfUtiliateurs = null)
     {
         $arrayQueriesResult = [];
-        $methods            = get_class_methods($class);
+        $methods = get_class_methods($class);
         $class = new BiQuery($date_state, $date_end, $listOfUtiliateurs);
 
         foreach ($methods as $method) {
@@ -138,49 +135,50 @@ class ReportingController extends Controller
     public function objectToArrayData($arrayResultQueries)
     {
         $counter = 0;
-        $index   = 0;
+        $index = 0;
 
         foreach ($arrayResultQueries as $elementResultQueries) {
 
             if ($counter == 0) {
                 foreach ($elementResultQueries as $subElementResultQueries) {
-                    $this->arrayDataQueries[0][8] = (int)$subElementResultQueries["count(stagiaire.id)"];
+                    $this->arrayDataQueries[0][8] = (int) $subElementResultQueries["count(stagiaire.id)"];
                 }
             } else {
 
                 if ($counter == 1) {
                     foreach ($elementResultQueries as $subElementResultQueries) {
-                       
-                        $this->arrayDataQueries[1][8] = (int)$subElementResultQueries["count(encadreur.id)"];
-                       // print_r($this->arrayDataQueries[1]);
-                       // die();
+
+                        $this->arrayDataQueries[1][8] = (int) $subElementResultQueries["count(encadreur.id)"];
+                        // print_r($this->arrayDataQueries[1]);
+                        // die();
                     }
                 } else {
                     if ($counter == 2) {
                         foreach ($elementResultQueries as $subElementResultQueries) {
-                           
-                            $this->arrayDataQueries[2][8] = (int)$subElementResultQueries["count(stagiaire.specialite)"];
-                            
+
+                            $this->arrayDataQueries[2][8] = (int) $subElementResultQueries["count(stagiaire.specialite)"];
+
                         }
                     } else {
-                       /* if ($counter == 3) {
+                        if ($counter == 3) {
+
                             foreach ($elementResultQueries as $subElementResultQueries) {
-                                if (array_key_exists("status_admin", $subElementResultQueries)) {
-                                    switch ($subElementResultQueries["status_admin"]) {
+                                if (array_key_exists("status", $subElementResultQueries)) {
+                                    switch ($subElementResultQueries["status"]) {
                                         case 0:
-                                            $this->arrayDataQueries[3][1] = (int)$subElementResultQueries["count(decaissement.status_admin)"];
+
+                                            $this->arrayDataQueries[3][1] = (int) $subElementResultQueries["count(stagiaire.id)"];
                                             break;
 
                                         case 1:
-                                            $this->arrayDataQueries[3][0] = (int)$subElementResultQueries["count(decaissement.status_admin)"];
+                                            $this->arrayDataQueries[3][0] = (int) $subElementResultQueries["count(stagiaire.id)"];
                                             break;
-                                        case 2:
-                                            $this->arrayDataQueries[3][2] = (int)$subElementResultQueries["count(decaissement.status_admin)"];
-                                            break;
+
                                     }
                                 }
                             }
-                        }*/
+
+                        }
                     }
                 }
             }
@@ -212,7 +210,7 @@ class ReportingController extends Controller
         if ($model->load(\Yii::$app->request->post()) && $model->validate()) {
 
             $this->dates[0] = $model->date_start;
-            $this->dates[1]   = $model->date_end;
+            $this->dates[1] = $model->date_end;
             $this->listOfUtiliateurs = $model->users;
         }
     }
@@ -224,14 +222,14 @@ class ReportingController extends Controller
      */
     public function actionIndex($filter = null)
     {
+        $this->layout = 'reportingLayout';
+        $model = new SearchBar();
 
-        $model        = new SearchBar();
-       
         $this->loadingData($model);
         $this->arrayResultQueries = $this->queriesAnswer(BiQuery::class, $this->dates[0], $this->dates[1], $this->listOfUtiliateurs);
         //construction of data provider used in export xls csv
-    //    $searchModel         = $this->make(TransactionSearch::class);
-    //    $this->dataProviders = $this->constructDataProvider($searchModel);
+        //    $searchModel         = $this->make(TransactionSearch::class);
+        //    $this->dataProviders = $this->constructDataProvider($searchModel);
         //construction of data used in js
         $this->objectToArrayData($this->arrayResultQueries);
         $this->arrayDataChartJs = Yii::$app->controller->make(ChartCreationService::class, [$this->arrayDataQueries])->run();
@@ -241,12 +239,12 @@ class ReportingController extends Controller
             [
 
                 'dailyTransactionOfCurentMonth' => $this->arrayDataChartJs[0],
-                'yearlyTransactions'            => $this->arrayDataChartJs[1],
-                'dailyDecaissementRequest'      => $this->arrayDataChartJs[2],
-      //          'monthlyMotifyDecaissements'    => $this->arrayDataChartJs[3],
-                'dataProviders'                 => $this->dataProviders,
-                'model'                         => $model,
-              
+                'yearlyTransactions' => $this->arrayDataChartJs[1],
+                'dailyDecaissementRequest' => $this->arrayDataChartJs[2],
+                'yearlyStatusStagiare' => $this->arrayDataChartJs[3],
+                'dataProviders' => $this->dataProviders,
+                'model' => $model,
+
             ]
         );
     }

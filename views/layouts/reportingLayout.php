@@ -26,7 +26,7 @@ AppAsset::register($this);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
     <?php $this->registerCsrfMetaTags() ?>
-    <title>Yalidine</title>
+    <title>Gestion Stagiare</title>
     <?php $this->head() ?>
 </head>
 
@@ -52,7 +52,7 @@ AppAsset::register($this);
                 
                 ['label' => Yii::t('app', 'Administrateur'), 'url' => ['/user/admin'], 'visible' => $user->isAdmin()],
                 ['label' => Yii::t('app', 'Reporting'), 'url' => ['/reporting/index'], 'visible' => $user->isAdmin()],
-                app\widgets\Notifications::widget(),
+            
                 Yii::$app->user->isGuest ? (['label' => 'Login', 'url' => ['/user/security/login']]) : ('<li>'
                     . Html::beginForm(['/site/logout'], 'post')
                     . Html::submitButton(
@@ -70,12 +70,6 @@ AppAsset::register($this);
 
         <div class="container">
 
-            <?= Breadcrumbs::widget([
-                'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-            ]) ?>
-
-            <?= Kpi::widget() ?>
-            <?= Alert::widget() ?>
             <?= $content ?>
         </div>
     </div>
