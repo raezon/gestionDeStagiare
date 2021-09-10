@@ -50,6 +50,7 @@ AppAsset::register($this);
                 // ['label' => 'About', 'url' => ['/site/about']],
                 // ['label' => 'Contact', 'url' => ['/site/contact']],
                 ['label' => Yii::t('app', 'Administrateur'), 'url' => ['/user/admin'], 'visible' => $user->isAdmin()],
+                ['label' => Yii::t('app', 'Reporting'), 'url' => ['/reporting/index'], 'visible' => $user->isAdmin() or $user->isEmployee() or $user->isResponsable()],
                 ['label' => Yii::t('app', 'Gérer stagiaires'), 'url' => ['/stagiaire/index'], 'visible' => $user->isAdmin() or $user->isEmployee()],
                 ['label' => Yii::t('app', 'Gérer stage'), 'url' => ['/stage/index'], 'visible' => $user->isAdmin()],
                 ['label' => Yii::t('app', 'Gérer centre d\'etude '), 'url' => ['/centre-detude/index'], 'visible' => $user->isAdmin()],

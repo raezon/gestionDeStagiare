@@ -42,13 +42,13 @@ class ChartCreationService
         // Transaction mensuelle durant cette année
         $this->arrayDataQueries[0] = $arrayDataQueries[0];
         // Top 10 Transaction mensuelle effectué par utilisateur 
-        $this->arrayDataQueries[1] = $arrayDataQueries[3];
+        $this->arrayDataQueries[1] = $arrayDataQueries[1];
         // Progression Du nombre de decaissements menuselle
         $this->arrayDataQueries[2] = $arrayDataQueries[2];
         // Progression Du nombre de transactions menuselle
-        $this->arrayDataQueries[3] = $arrayDataQueries[1];
+
         // Motifi decaissement durant le mois en cours
-        $this->arrayDataQueries[4] = $arrayDataQueries[4];
+    //    $this->arrayDataQueries[4] = $arrayDataQueries[4];
 
         $this->arrayLabelsUserNames=$arrayLabelsUserNames;
     }
@@ -140,20 +140,21 @@ class ChartCreationService
         $donutsColors = ["rgb(75,181,67)", 'rgb(255, 99, 132)', 'rgb(255, 205, 86)'];
         $otherChartsColors = "rgba(75,192,192,0.4)";
 
-        for ($i = 0; $i < 5; $i++) {
+        for ($i = 0; $i < 3; $i++) {
 
             switch ($i) {
                 case 0:
-                    $label = "Transaction mensuelle durant cette année";
+                    $label = "Nombre Stagiare par mois";
                     $this->arrayDataChart[] = $this->createArrayDataChart($this->arrayDataQueries[0], ChartCreationService::MONTHS, $label, $otherChartsColors);
                     break;
                 case 1:
-            
-                    $label = "Top 10 Transaction mensuelle effectué par utilisateur ";
-                    $this->arrayDataChart[] = $this->createArrayDataChart($this->arrayDataQueries[1], $this->arrayLabelsUserNames, $label, $otherChartsColors);
+
+                    $label = "Nombre encadreur par mois";
+                    $this->arrayDataChart[] = $this->createArrayDataChart($this->arrayDataQueries[1], ChartCreationService::MONTHS, $label, $otherChartsColors);
                     break;
                 case 2:
-                    $label = "Progression Du nombre de decaissements menuselle";
+   
+                    $label = "Nombre de specialité par mois";
                     $this->arrayDataChart[] = $this->createArrayDataChart($this->arrayDataQueries[2], ChartCreationService::JOURS, $label, $otherChartsColors);
 
                     break;
